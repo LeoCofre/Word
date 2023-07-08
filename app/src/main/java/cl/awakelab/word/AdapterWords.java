@@ -2,6 +2,7 @@ package cl.awakelab.word;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ public class AdapterWords extends RecyclerView.Adapter<AdapterWords.ViewHolders>
 
 
     private List<String> words;
+
     @NonNull
     //Creacion de viewHolder
     @Override
@@ -34,15 +36,21 @@ public class AdapterWords extends RecyclerView.Adapter<AdapterWords.ViewHolders>
 
     }
 
+    public void setData(List<String> data) {
+        this.words = data;
+    }
+
     public class ViewHolders extends RecyclerView.ViewHolder {
 
         private ItemBinding itemBinding;
+
         public ViewHolders(@NonNull ItemBinding binding) {
             super(binding.getRoot());
             itemBinding = binding;
         }
-        public void showInformation(String words ){
-        itemBinding.textView.setText(words);
+
+        public void showInformation(String words) {
+            itemBinding.textView.setText(words);
         }
     }
 }

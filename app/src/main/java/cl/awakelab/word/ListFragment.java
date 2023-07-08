@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cl.awakelab.word.databinding.FragmentListBinding;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ListFragment#newInstance} factory method to
@@ -58,7 +63,18 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        FragmentListBinding binding = FragmentListBinding.inflate(getActivity().getLayoutInflater());
+        AdapterWords adapter = new AdapterWords();
+        adapter.setData(getData());
+        binding.listRv.setAdapter(adapter);
+        return binding.getRoot();
+    }
+
+    public List<String> getData(){
+        List<String> data = new ArrayList<>();
+        for (int i=0; i<20; i++){
+            data.add("Word " + i);
+        }
+        return data;
     }
 }
