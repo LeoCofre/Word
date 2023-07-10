@@ -3,6 +3,8 @@ package cl.awakelab.word;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,22 +12,20 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cl.awakelab.word.databinding.FragmentListBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FragmentListBinding binding;
+    private List<String> programmingLanguages = new ArrayList<>();
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
@@ -33,15 +33,7 @@ public class ListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static ListFragment newInstance(String param1, String param2) {
         ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
@@ -63,18 +55,70 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentListBinding binding = FragmentListBinding.inflate(getActivity().getLayoutInflater());
+        binding = FragmentListBinding.inflate(getActivity().getLayoutInflater(),container ,false);
         AdapterWords adapter = new AdapterWords();
         adapter.setData(getData());
         binding.listRv.setAdapter(adapter);
+        binding.listRv.addItemDecoration(new DividerItemDecoration(binding.listRv.getContext(), DividerItemDecoration.VERTICAL));
+        initListener();
+
         return binding.getRoot();
     }
 
-    public List<String> getData(){
-        List<String> data = new ArrayList<>();
-        for (int i=0; i<20; i++){
-            data.add("Word " + i);
-        }
-        return data;
+    private void initListener() {
+        binding.floatingActionButton.setOnClickListener(v -> {
+        programmingLanguages.add(randomLanguages());
+        binding.listRv.getAdapter().notifyItemInserted(programmingLanguages.size());
+        binding.listRv.smoothScrollToPosition(programmingLanguages.size());
+        });
+    }
+
+    private String randomLanguages(){
+        List<String> languagesRandom = new ArrayList<>();
+        languagesRandom.add("C#");
+        languagesRandom.add("C");
+        languagesRandom.add("Shell");
+        languagesRandom.add("Rust");
+        languagesRandom.add("Elixir");
+        languagesRandom.add("Lua");
+        languagesRandom.add("DM");
+        languagesRandom.add("Clojure");
+        languagesRandom.add("PowerShell");
+        languagesRandom.add("CoffeeScript");
+        languagesRandom.add("Haskell");
+        languagesRandom.add("OCaml");
+        languagesRandom.add("Emacs Lisp");
+        languagesRandom.add("Vim script");
+        languagesRandom.add("Jsonnet");
+        languagesRandom.add("Erlang");
+        languagesRandom.add("Puppet");
+        languagesRandom.add("Smalltalk");
+
+        int size = languagesRandom.size();
+        Random random = new Random();
+        int randomIndex =random.nextInt(size);
+
+        return languagesRandom.get(randomIndex);
+    }
+
+    private List<String> getData() {
+        programmingLanguages.add("Java");
+        programmingLanguages.add("Kotlin");
+        programmingLanguages.add("Phyton");
+        programmingLanguages.add("Php");
+        programmingLanguages.add("JavaScript");
+        programmingLanguages.add("Go");
+        programmingLanguages.add("C++");
+        programmingLanguages.add("Ruby");
+        programmingLanguages.add("TypeScript");
+        programmingLanguages.add("Swift");
+        programmingLanguages.add("Dart");
+        programmingLanguages.add("Perl");
+        programmingLanguages.add("Objetive-C");
+        programmingLanguages.add("Groovy");
+        programmingLanguages.add("R");
+        programmingLanguages.add("Scala");
+
+        return programmingLanguages;
     }
 }

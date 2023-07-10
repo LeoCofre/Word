@@ -23,6 +23,7 @@ public class AdapterWords extends RecyclerView.Adapter<AdapterWords.ViewHolders>
         return new ViewHolders(binding);
     }
 
+    //Enlace del viewHolder
     @Override
     public void onBindViewHolder(@NonNull AdapterWords.ViewHolders holder, int position) {
         String item = words.get(position);
@@ -30,6 +31,7 @@ public class AdapterWords extends RecyclerView.Adapter<AdapterWords.ViewHolders>
 
     }
 
+    //Cantidad de elementos
     @Override
     public int getItemCount() {
         return words.size();
